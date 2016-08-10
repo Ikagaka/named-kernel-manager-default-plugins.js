@@ -4,7 +4,6 @@
   "description": "ikagaka named kernel manager default plugins",
   "keywords": [],
   "main": "./es5/lib/named-kernel-manager-default-plugins.js",
-  "browser": "./web/named-kernel-manager-default-plugins.js",
   "scripts": {
     "test": "gulp test"
   },
