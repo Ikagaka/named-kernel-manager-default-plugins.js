@@ -1,0 +1,23 @@
+{
+  "name": "named-kernel-manager-default-plugins",
+  "description": "ikagaka named kernel manager default plugins",
+  "dependencies": {
+  },
+  "main": ["./web/named-kernel-manager-default-plugins.js"],
+  "ignore": [
+    "**/.sw?",
+    "**/.*.sw?",
+    "bower_components",
+    "node_modules",
+    "npm-debug.log",
+    "/coverage",
+    "/doc",
+    "/.*",
+    "appveyor.yml",
+    "gulpfile.babel.js",
+    "karma.conf.js",
+    "webpack.config.js",
+    "esdoc.json"
+  ],
+  "license": "MIT"
+}
