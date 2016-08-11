@@ -31,35 +31,35 @@ export class OperationController extends NamedKernelManagerController {
   }
 
   async boot_named(namedId) {
+    // TODO change / call / vanish
     const kernel = await this.manager.loadGhost(namedId);
     kernel.start();
-    const profile = await this.manager.profile();
-    profile.ghosts.push(namedId);
-    await this.manager.profile(profile);
   }
 
   close_named(namedId) {
+    // TODO change
     return new Promise((resolve) => {
       const kernel = this.manager.kernel(namedId);
       this.closeComplete[namedId] = async () => {
         delete this.closeComplete[namedId];
-        const profile = await this.manager.profile();
-        profile.ghosts = profile.ghosts.filter((ghostname) => ghostname !== namedId);
-        await this.manager.profile(profile);
         resolve();
       };
       kernel.close();
     });
   }
 
-  async change_named(oldNamedId, newNamedId) {
-    await this.close_named(oldNamedId);
-    await this.boot_named(newNamedId);
+  async change_named(namedId, fromNamedId) {
+    // TODO
+    await this.close_named(fromNamedId);
+    await this.boot_named(namedId);
   }
 
   async close() {
+    const profile = await this.manager.profile();
+    profile.ghosts = this.manager.namedIds();
+    await this.manager.profile(profile);
     await Promise.all(this.manager.namedIds().map((namedId) => this.close_named(namedId)));
-    this.kernel.halt();
+    this.manager.halt();
   }
 
   halt() {

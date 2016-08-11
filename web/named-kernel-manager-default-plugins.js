@@ -180,7 +180,7 @@ var namedKernelManagerDefaultPlugins =
 	    key: 'boot_named',
 	    value: function () {
 	      var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(namedId) {
-	        var kernel, profile;
+	        var kernel;
 	        return _regenerator2.default.wrap(function _callee2$(_context2) {
 	          while (1) {
 	            switch (_context2.prev = _context2.next) {
@@ -192,17 +192,8 @@ var namedKernelManagerDefaultPlugins =
 	                kernel = _context2.sent;
 	
 	                kernel.start();
-	                _context2.next = 6;
-	                return this.manager.profile();
 	
-	              case 6:
-	                profile = _context2.sent;
-	
-	                profile.ghosts.push(namedId);
-	                _context2.next = 10;
-	                return this.manager.profile(profile);
-	
-	              case 10:
+	              case 4:
 	              case 'end':
 	                return _context2.stop();
 	            }
@@ -221,31 +212,18 @@ var namedKernelManagerDefaultPlugins =
 	    value: function close_named(namedId) {
 	      var _this3 = this;
 	
+	      // TODO change
 	      return new _promise2.default(function (resolve) {
 	        var kernel = _this3.manager.kernel(namedId);
 	        _this3.closeComplete[namedId] = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
-	          var profile;
 	          return _regenerator2.default.wrap(function _callee3$(_context3) {
 	            while (1) {
 	              switch (_context3.prev = _context3.next) {
 	                case 0:
 	                  delete _this3.closeComplete[namedId];
-	                  _context3.next = 3;
-	                  return _this3.manager.profile();
-	
-	                case 3:
-	                  profile = _context3.sent;
-	
-	                  profile.ghosts = profile.ghosts.filter(function (ghostname) {
-	                    return ghostname !== namedId;
-	                  });
-	                  _context3.next = 7;
-	                  return _this3.manager.profile(profile);
-	
-	                case 7:
 	                  resolve();
 	
-	                case 8:
+	                case 2:
 	                case 'end':
 	                  return _context3.stop();
 	              }
@@ -258,17 +236,17 @@ var namedKernelManagerDefaultPlugins =
 	  }, {
 	    key: 'change_named',
 	    value: function () {
-	      var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(oldNamedId, newNamedId) {
+	      var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(namedId, fromNamedId) {
 	        return _regenerator2.default.wrap(function _callee4$(_context4) {
 	          while (1) {
 	            switch (_context4.prev = _context4.next) {
 	              case 0:
 	                _context4.next = 2;
-	                return this.close_named(oldNamedId);
+	                return this.close_named(fromNamedId);
 	
 	              case 2:
 	                _context4.next = 4;
-	                return this.boot_named(newNamedId);
+	                return this.boot_named(namedId);
 	
 	              case 4:
 	              case 'end':
@@ -290,19 +268,31 @@ var namedKernelManagerDefaultPlugins =
 	      var _ref5 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee5() {
 	        var _this4 = this;
 	
+	        var profile;
 	        return _regenerator2.default.wrap(function _callee5$(_context5) {
 	          while (1) {
 	            switch (_context5.prev = _context5.next) {
 	              case 0:
 	                _context5.next = 2;
+	                return this.manager.profile();
+	
+	              case 2:
+	                profile = _context5.sent;
+	
+	                profile.ghosts = this.manager.namedIds();
+	                _context5.next = 6;
+	                return this.manager.profile(profile);
+	
+	              case 6:
+	                _context5.next = 8;
 	                return _promise2.default.all(this.manager.namedIds().map(function (namedId) {
 	                  return _this4.close_named(namedId);
 	                }));
 	
-	              case 2:
-	                this.kernel.halt();
+	              case 8:
+	                this.manager.halt();
 	
-	              case 3:
+	              case 9:
 	              case 'end':
 	                return _context5.stop();
 	            }
