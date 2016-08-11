@@ -1,6 +1,6 @@
 {
   "name": "named-kernel-manager-default-plugins",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "ikagaka named kernel manager default plugins",
   "keywords": [],
   "main": "./es5/lib/named-kernel-manager-default-plugins.js",
