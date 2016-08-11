@@ -7349,7 +7349,7 @@ var namedKernelManagerDefaultPlugins =
 	                list = {};
 	
 	                ghosts.forEach(function (_, index) {
-	                  _this4.list[ghosts[index]] = shells[index];
+	                  list[ghosts[index]] = shells[index];
 	                });
 	                this.list = list;
 	

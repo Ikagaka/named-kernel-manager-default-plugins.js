@@ -36,7 +36,7 @@ export class ShellList extends ElementList {
     const ghosts = await nanikaStorage.ghosts();
     const shells = await Promise.all(ghosts.map((dirpath) => this.getShellList(dirpath)));
     const list = {};
-    ghosts.forEach((_, index) => { this.list[ghosts[index]] = shells[index] });
+    ghosts.forEach((_, index) => { list[ghosts[index]] = shells[index] });
     this.list = list;
   }
 
