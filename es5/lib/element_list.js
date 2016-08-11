@@ -285,9 +285,9 @@ var ElementListController = exports.ElementListController = function (_NamedKern
   (0, _createClass3.default)(ElementListController, [{
     key: 'start',
     value: function start() {
-      this.manager.registerComponent('GhostList', new GhostList());
-      this.manager.registerComponent('BalloonList', new BalloonList());
-      this.manager.registerComponent('ShellList', new ShellList());
+      this.manager.registerComponent('GhostList', new GhostList(this.manager));
+      this.manager.registerComponent('BalloonList', new BalloonList(this.manager));
+      this.manager.registerComponent('ShellList', new ShellList(this.manager));
     }
   }]);
   return ElementListController;
